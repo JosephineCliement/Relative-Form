@@ -1,2 +1,131 @@
 app component.ts
 -----------------------------------------
+import { Component, OnInit} from '@angular/core';
+import { FormGroup,FormControl} from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
+import { FormGroupName } from '@angular/forms';
+
+@Component({
+  selector: 'app-comp1',
+  templateUrl: './comp1.component.html',
+  styleUrls: ['./comp1.component.css']
+})
+export class Comp1Component implements OnInit {
+
+  studentForm:any;
+//name:any;
+fn:string="";
+ln:string="";
+ag:any="";
+
+ 
+
+
+  constructor(  private formBuilder: FormBuilder) { 
+    
+    this.studentForm= new FormGroup({})
+   }
+
+  
+  ngOnInit(){
+ this.studentForm=this.formBuilder.group({
+
+  firstname:'',
+  lastname:'',
+  age:''
+
+ })
+
+
+
+  }
+  onSubmit(){
+    //console.log(this.studentForm.controls.firstname.value);
+    //console.log(this.studentForm.controls.lastname.value);
+    //console.log(this.studentForm.controls.age.value);
+
+    this.fn=this.studentForm.controls.firstname.value
+    this.ln=this.studentForm.controls.lastname.value
+    this.ag=this.studentForm.controls.age.value
+   //this.name=this.studentForm.controls.firstname.value
+    
+
+  }
+
+  get firstname(){
+    return this.studentForm.get('fistname');
+    
+    }
+    
+  }
+ ----------------------------------------------------------------------------------------------------------------------------------------------------
+ component.html
+ 
+ 
+ 
+<body>
+    <hr>
+<h2 style="color: black">Personal Details</h2>
+<hr>
+<form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+ FirstName : <input type="text" name="fn" formControlName="firstname" placeholder="Firstname" [ngModel]="fn">
+ 
+
+<br>
+<br>
+Last Name  : <input type="text" name="ln" formControlName="lastname" placeholder="lastname" [ngModel]="ln">
+
+<br>
+<br>
+ Age : <input type="number" name="ag" formControlName="age" [ngModel]="ag">
+ 
+<br>
+<br>
+<br>
+<button type="submit">Submit</button>
+
+
+</form>
+<div>
+<br>
+<br>
+
+  <h3> Firstname = {{fn}} </h3> <br>
+  <h3> Lastname = {{ln}}</h3><br>
+  <h3> Age = {{ag}}</h3>
+</div>
+</body>
+=========================================================================================================================================================
+app.module
+
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { Comp1Component } from './comp1/comp1.component';
+import { ReactiveFormsModule } from '@angular/forms';
+
+@NgModule({
+  declarations: [
+    AppComponent,
+    Comp1Component
+  ],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    ReactiveFormsModule
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
+
+====================================================================================================================================================================
+app.component.html
+
+<h1>Registration Form</h1>
+  <app-comp1></app-comp1>
+  
+  ===================================================================================================================================================================
+
