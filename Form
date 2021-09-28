@@ -129,3 +129,97 @@ app.component.html
   
   ===================================================================================================================================================================
 
+
+SERVICE
+----------------------------
+service.ts
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class SerService {
+
+  constructor() { }
+getData()
+{
+ return {
+   name:'Roma',
+   age:23,
+   id:100
+ }
+}
+
+  
+ 
+  }
+
+
+--------------------------------------------------------------------------------------------------------------------------------------
+
+app.component.ts
+
+import { Component } from '@angular/core';
+import{SerService} from './ser.service';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Project3';
+name="";
+
+  constructor(private ser: SerService )
+  {
+     console.warn(this.ser.getData());
+     let data=this.ser.getData();
+     this.name=data.name
+  }
+}
+------------------------------------------------------------------------------------------------------------------------------------
+
+
+app.component.html
+
+<h1>Hello</h1>
+
+<h2>{{name}}</h2>
+=========================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
